@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { InvoiceService } from "../use-cases/invoice/invoice";
+import { InvoiceService } from "../use-cases/invoices/invoices";
 
 
 const router = Router();
