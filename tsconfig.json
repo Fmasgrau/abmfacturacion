@@ -8,6 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["*.ts", "**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["*.ts", "**/*.ts", "use-cases/clients/__tests__/createClient.test.ts"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
