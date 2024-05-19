@@ -1,17 +1,17 @@
 import { Router } from "express";
-import { InvoiceService } from "../use-cases/invoices/invoices";
+
+import validationMiddleware from "../middleware/validationMiddleware";
+import invoiceValidator from "../validators/invoiceValidator";
+import { createInvoice } from "../use-cases/invoices/createInvoice";
+import { getInvoice } from "../use-cases/invoices/getInvoice";
+import { getInvoices } from "../use-cases/invoices/getInvoices";
 
 
 const router = Router();
-const service = new InvoiceService();
 
-router.post("/", (req: any, res: any) => {
-  service.createInvoice(req.body);
-  res.json({ message: "Invoice created" });
-});
-router.get("/", async (req: any, res: any) => {
-  const invoiceResponse = await service.getInvoices();
-  res.json(invoiceResponse);
-});
+router.post("/", validationMiddleware(invoiceValidator.create), createInvoice);
+router.get("/", getInvoices)
+router.get("/:id", getInvoice);
 
-export default router
+
+export default router;
