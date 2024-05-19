@@ -6,9 +6,10 @@ import Product from "../models/product.model";
 
 export const createInvoiceService = async ({
   client_id,
-  total
+  total,
+  transaction
 }: CreateInvoiceDto) => {
-  return await Invoices.create({ client_id, total });
+  return await Invoices.create({ client_id, total }, {transaction});
 };
 
 export const getInvoiceService = async (id: number) => {

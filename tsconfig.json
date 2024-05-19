@@ -8,6 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["*.ts", "**/*.ts", "server.cjs"],
+  "include": ["*.ts", "**/*.ts"],
   "exclude": ["node_modules"]
 }
