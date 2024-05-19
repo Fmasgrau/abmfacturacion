@@ -1,12 +1,14 @@
-import { CreateInvoice } from "../entities/invoice";
+import { CreateInvoiceDto } from "../entities/invoice";
+import Client from "../models/clients.model";
 import Invoices from "../models/invoice.model";
+import InvoiceItems from "../models/invoiceItems.model";
+import Product from "../models/product.model";
 
 export const createInvoiceService = async ({
   client_id,
-  total,
-  invoiceItems,
-}: CreateInvoice) => {
-  return await Invoices.create({ client_id, total, invoiceItems });
+  total
+}: CreateInvoiceDto) => {
+  return await Invoices.create({ client_id, total });
 };
 
 export const getInvoiceService = async (id: number) => {
@@ -15,4 +17,24 @@ export const getInvoiceService = async (id: number) => {
 
 export const getAllInvoicesService = async () => {
   return await Invoices.findAll();
+};
+
+export const getAllInvoicesWithDetails = async () => {
+  return await Invoices.findAll({
+    include: [
+      {
+        model: Client,
+        attributes: ['id', 'name']
+      },
+      {
+        model: InvoiceItems,
+        include: [
+          {
+            model: Product,
+            attributes: ['id', 'name', 'price']
+          }
+        ]
+      }
+    ]
+  });
 };

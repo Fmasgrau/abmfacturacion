@@ -1,5 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/database";
+import { sequelize } from "../config/database";
+import Client from "./clients.model";
+import InvoiceItems from "./invoiceItems.model";
 
 class Invoices extends Model {
   public id!: number;
@@ -19,6 +21,10 @@ Invoices.init(
     client_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: Client,
+        key: 'id',
+      },
     },
     total: {
       type: DataTypes.DECIMAL(10, 2),
@@ -31,5 +37,9 @@ Invoices.init(
     timestamps: true,
   },
 );
+
+Invoices.belongsTo(Client, { foreignKey: 'client_id' });
+Client.hasMany(Invoices, { foreignKey: 'client_id' });
+
 
 export default Invoices;

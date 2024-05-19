@@ -1,7 +1,7 @@
 import routerApi from "./routes/index";
 import express from "express";
 import bodyParser from "body-parser";
-import sequelize from "./config/database";
+import {sequelize} from "./config/database";
 
 const app = express();
 const port = 3000;

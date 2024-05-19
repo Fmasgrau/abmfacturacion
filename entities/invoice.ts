@@ -1,7 +1,5 @@
-import { CreateInvoiceItem } from "./invoiceItems";
 
-export interface CreateInvoice {
+export interface CreateInvoiceDto {
   client_id: number;
   total: number;
-  invoiceItems: CreateInvoiceItem[];
 }
