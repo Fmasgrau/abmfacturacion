@@ -51,5 +51,5 @@ Este repositorio contiene una API para la gestión de facturas. A continuación,
       + Realizar login con el correo electrónico y la contraseña del usuario creado. Esto te proporcionará un token que Postman guardará automáticamente en las variables de entorno, permitiéndote acceder a los demás endpoints de la API.
   
 
-Cualquier duda o inquietud puede contactarme a **facundomasgrau@gmail.com**
+Cualquier duda o inquietud puedes contactarme a **facundomasgrau@gmail.com**
 
