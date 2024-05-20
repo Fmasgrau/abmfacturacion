@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import {sequelize} from "./config/database";
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 app.use(bodyParser.json());
 

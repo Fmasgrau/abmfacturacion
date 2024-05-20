@@ -1,4 +1,4 @@
-# Invoice Management API
+﻿# Invoice Management API
 
 Este repositorio contiene una API para la gestión de facturas. A continuación, se detallan los pasos para configurar y usar el entorno de desarrollo.
 
@@ -25,11 +25,13 @@ Este repositorio contiene una API para la gestión de facturas. A continuación,
 
     DB_PASSWORD=admin123 
 
-    DB_NAME=invoice\_db 
+    DB_NAME=invoice_db 
 
     DB_PORT=5432 
 
     JWT_SECRET=bienvenidoApayana 
+
+    SERVER_PORT=3000
 
 3. **Colocar el archivo SQL:** Asegúrate de colocar el archivo **sql.db** dentro de la carpeta principal del proyecto para configurar la base de datos.
 4. **Iniciar Docker:** Utiliza Docker Compose para levantar los servicios en segundo plano:

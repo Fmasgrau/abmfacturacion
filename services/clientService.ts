@@ -8,14 +8,20 @@ export const getClientService = async (id: number) => {
   return await Client.findByPk(id);
 };
 
-export const getAllClientsService = async () => {
-  return await Client.findAll();
+export const getAllClientsService = async ({
+  limit,
+  offset,
+}: {
+  limit: number;
+  offset: number;
+}) => {
+  return await Client.findAndCountAll({ limit, offset });
 };
 
 export const updateClientService = async (
   id: number,
   name: string,
-  email: string
+  email: string,
 ) => {
   const client = await Client.findByPk(id);
   if (!client) {

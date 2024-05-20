@@ -12,5 +12,5 @@ const update = Joi.object({
 
 export default {
   create,
-  update,
+  update
 };

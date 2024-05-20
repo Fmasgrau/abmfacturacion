@@ -8,6 +8,8 @@ import { getProducts } from "../use-cases/products/getProducts";
 import { updateProduct } from "../use-cases/products/updateProduct";
 import productValidator from "../validators/productValidator";
 import { authMiddleware } from "../middleware/authMiddleware";
+import requestsValidator from "../validators/requestsValidator";
+import { validateParams } from "../middleware/paramsValidatorMiddleware";
 
 const router = Router();
 
@@ -17,7 +19,12 @@ router.post(
   validationMiddleware(productValidator.create),
   createProduct,
 );
-router.get("/", authMiddleware, getProducts);
+router.get(
+  "/",
+  authMiddleware,
+  validateParams(requestsValidator.getAll),
+  getProducts,
+);
 router.get("/:id", authMiddleware, getProduct);
 router.patch(
   "/:id",

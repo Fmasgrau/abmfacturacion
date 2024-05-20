@@ -8,6 +8,8 @@ import { getClient } from "../use-cases/clients/getClient";
 import { deleteClient } from "../use-cases/clients/deleteClient";
 import { updateClient } from "../use-cases/clients/updateClients";
 import { authMiddleware } from "../middleware/authMiddleware";
+import requestsValidator from "../validators/requestsValidator";
+import { validateParams } from "../middleware/paramsValidatorMiddleware";
 
 const router = Router();
 
@@ -17,7 +19,12 @@ router.post(
   validationMiddleware(clientValidator.create),
   createClient,
 );
-router.get("/", authMiddleware, getClients);
+router.get(
+  "/",
+  authMiddleware,
+  validateParams(requestsValidator.getAll),
+  getClients,
+);
 router.get("/:id", authMiddleware, getClient);
 router.patch(
   "/:id",

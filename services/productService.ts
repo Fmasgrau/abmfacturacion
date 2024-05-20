@@ -1,4 +1,5 @@
 import { CreateProductDTO, EditProductDTO } from "../entities/product";
+import { RequestPaginatedParams } from "../entities/request";
 import Product from "../models/product.model";
 
 export const createProductService = async ({
@@ -12,8 +13,11 @@ export const getProductService = async (id: number) => {
   return await Product.findByPk(id);
 };
 
-export const getAllProductsService = async () => {
-  return await Product.findAll();
+export const getAllProductsService = async ({
+  limit,
+  offset,
+}: RequestPaginatedParams) => {
+  return await Product.findAndCountAll({ limit, offset });
 };
 
 export const updateProductService = async ({
