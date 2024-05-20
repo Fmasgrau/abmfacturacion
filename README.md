@@ -2,6 +2,8 @@
 
 Este repositorio contiene una API para la gestión de facturas. A continuación, se detallan los pasos para configurar y usar el entorno de desarrollo.
 
+![image](https://github.com/Fmasgrau/abmfacturacion/assets/40182366/376ebdbb-10be-446d-aad6-ce268f2903f8)
+
 ## Requisitos Previos
 
 - Docker y Docker Compose instalados.
