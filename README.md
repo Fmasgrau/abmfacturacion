@@ -50,6 +50,31 @@ Este repositorio contiene una API para la gestión de facturas. A continuación,
      + Crear un usuario mediante el endpoint **Create User** dentro de la sección **users**.
       + Realizar login con el correo electrónico y la contraseña del usuario creado. Esto te proporcionará un token que Postman guardará automáticamente en las variables de entorno, permitiéndote acceder a los demás endpoints de la API.
   
+## Instrucciones de Instalación de manera local
+En caso de querer correr el proyecto localmente y la base de datos en docker deberías seguir los siguientes pasos:
+
+1.**Seguir pasos 1,2 y 3 del apartado Instrucciones de instalación**
+
+2.**Iniciar la base de datos en docker**
+   
+        docker-compose up -d db
+
+3.**Instalar las dependencias**
+
+       yarn add
+       
+4.**Una vez instaladas**
+
+  Correr el comando para levantar el entorno en desarrollo:
+  
+      yarn dev
+      
+  Correr el comando para levantar el entorno de test:
+  
+      yarn test
+
+5.**Ir a Uso de la API**
+
 
 Cualquier duda o inquietud puedes contactarme a **facundomasgrau@gmail.com**
 
