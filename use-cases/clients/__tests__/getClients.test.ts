@@ -12,7 +12,12 @@ describe("getClients Controller", () => {
   let consoleErrorMock: jest.SpyInstance;
 
   beforeEach(() => {
-    req = {};
+    req = {
+      query: {
+        page: "1",
+        limit: "10",
+      },
+    };
 
     jsonMock = jest.fn();
     statusMock = jest.fn().mockReturnValue({ json: jsonMock });
@@ -24,7 +29,9 @@ describe("getClients Controller", () => {
     (getAllClientsService as jest.Mock).mockClear();
 
     // Mock console.error
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+    consoleErrorMock = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -32,17 +39,28 @@ describe("getClients Controller", () => {
   });
 
   it("should return a list of clients and 200 status", async () => {
-    const mockClients = [
-      { id: 1, name: "Client One", email: "one@example.com" },
-      { id: 2, name: "Client Two", email: "two@example.com" },
-    ];
+    const mockClients = {
+      count: 2,
+      rows: [
+        { id: 1, name: 'Client One', email: 'one@example.com' },
+        { id: 2, name: 'Client Two', email: 'two@example.com' },
+      ],
+    };
+    const page = 1;
+    const limit = 10;
+    const offset = (page - 1) * limit;
     (getAllClientsService as jest.Mock).mockResolvedValue(mockClients);
 
     await getClients(req as Request, res as Response);
 
-    expect(getAllClientsService).toHaveBeenCalled();
+    expect(getAllClientsService).toHaveBeenCalledWith({ limit, offset });
     expect(statusMock).toHaveBeenCalledWith(200);
-    expect(jsonMock).toHaveBeenCalledWith(mockClients);
+    expect(jsonMock).toHaveBeenCalledWith({
+      totalItems: 2,
+      totalPages: 1,
+      currentPage: 1,
+      results: mockClients.rows,
+    });
   });
 
   it("should return 500 status for internal server errors", async () => {
