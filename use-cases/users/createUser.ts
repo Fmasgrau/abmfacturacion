@@ -4,7 +4,7 @@ import { createUserService } from "../../services/userService";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const secret = process.env.JWT_SECRET || "Bienvenido a payana";
+const secret = process.env.JWT_SECRET;
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -14,7 +14,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
       email,
       password: hashedPassword,
     });
-    const token = jwt.sign({ id: newUser.id, email: newUser.email }, secret, {
+    const token = jwt.sign({ id: newUser.id, email: newUser.email }, secret as string, {
       expiresIn: "1h",
     });
 

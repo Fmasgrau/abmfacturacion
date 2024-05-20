@@ -5,6 +5,8 @@ export const createUserService = async ({ email, password }: CreateUserDTO) => {
   return await User.create({ email, password });
 };
 
-export const getUserService = async (id: number) => {
-  return await User.findByPk(id);
+export const getUserService = async (email: string) => {
+  return await User.findOne({ where: { email }, raw: true});
 };
+
+

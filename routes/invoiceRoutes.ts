@@ -6,14 +6,18 @@ import { createInvoice } from "../use-cases/invoices/createInvoice";
 import { getInvoice } from "../use-cases/invoices/getInvoice";
 import { getInvoices } from "../use-cases/invoices/getInvoices";
 import { getAllInvoicesDetails } from "../use-cases/invoices/getAllInvoicesWithItems";
-
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = Router();
 
-router.post("/", validationMiddleware(invoiceValidator.create), createInvoice);
-router.get("/", getInvoices);
-router.get("/details", getAllInvoicesDetails);
-router.get("/:id", getInvoice);
-
+router.post(
+  "/",
+  authMiddleware,
+  validationMiddleware(invoiceValidator.create),
+  createInvoice,
+);
+router.get("/", authMiddleware, getInvoices);
+router.get("/details", authMiddleware, getAllInvoicesDetails);
+router.get("/:id", authMiddleware, getInvoice);
 
 export default router;

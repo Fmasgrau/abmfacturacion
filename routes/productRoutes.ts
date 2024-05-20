@@ -7,17 +7,24 @@ import { getProduct } from "../use-cases/products/getProduct";
 import { getProducts } from "../use-cases/products/getProducts";
 import { updateProduct } from "../use-cases/products/updateProduct";
 import productValidator from "../validators/productValidator";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = Router();
 
-router.post("/", validationMiddleware(productValidator.create), createProduct);
-router.get("/", getProducts);
-router.get("/:id", getProduct);
+router.post(
+  "/",
+  authMiddleware,
+  validationMiddleware(productValidator.create),
+  createProduct,
+);
+router.get("/", authMiddleware, getProducts);
+router.get("/:id", authMiddleware, getProduct);
 router.patch(
   "/:id",
+  authMiddleware,
   validationMiddleware(productValidator.update),
   updateProduct,
 );
-router.delete("/:id", deleteProduct);
+router.delete("/:id", authMiddleware, deleteProduct);
 
 export default router;
